@@ -18,10 +18,9 @@ install:
     - export PATH=/Users/travis/miniconda/bin:$PATH
     - conda update --yes conda
     - conda install --yes conda-build jinja2 anaconda-client
-    - conda config --add channels https://conda.binstar.org/jjhelmus
 script:
-    - conda build -q --python 2.7 conda-recipe
-    - conda build -q --python 3.5 conda-recipe
+    - conda build -q -c jjhelmus --python 2.7 conda-recipe
+    - conda build -q -c jjhelmus --python 3.5 conda-recipe
 
 after_success:
     - cp /Users/travis/miniconda/conda-bld/osx-64/*.tar.bz2 .
