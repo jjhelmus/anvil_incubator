@@ -11,8 +11,8 @@ env:
         #- secure: "cvNteNjK7jluxGWvhp7EinJDa69TuvEAwHP/CrFpGd4u6/KV+ef7gjKvDds5JqnCI5srow8iUf1lwYuJ4c4Lg8SyMizhKzyG9x6AYbfN5W3jKk7bNRTDYkzf8n+JXzOn5i35CbPe/Jp9775ITI5aYmccuM7mfSCDC6kXzhsIWTk="
 
 install: 
-    - MINICONDA_URL="http://repo.continuum.io/miniconda"
-    - MINCONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
+    - MINICONDA_URL="https://repo.continuum.io/miniconda"
+    - MINICONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
     - wget "${MINICONDA_URL}/${MINICONDA_FILE}"
     - bash $MINICONDA_FILE -b
     - export PATH=/Users/travis/miniconda3/bin:$PATH
