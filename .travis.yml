@@ -11,7 +11,14 @@ env:
         #- secure: "cvNteNjK7jluxGWvhp7EinJDa69TuvEAwHP/CrFpGd4u6/KV+ef7gjKvDds5JqnCI5srow8iUf1lwYuJ4c4Lg8SyMizhKzyG9x6AYbfN5W3jKk7bNRTDYkzf8n+JXzOn5i35CbPe/Jp9775ITI5aYmccuM7mfSCDC6kXzhsIWTk="
 
 install: 
-    - source install.sh
+    - MINICONDA_URL="http://repo.continuum.io/miniconda"
+    - MINICONDA_FILE="Miniconda-3.8.3-MacOSX-x86_64.sh"
+    - wget "${MINICONDA_URL}/${MINICONDA_FILE}"
+    - bash $MINICONDA_FILE -b
+    - export PATH=/Users/travis/miniconda/bin:$PATH
+    - conda update --yes conda
+    - conda install --yes conda-build jinja2 anaconda-client
+    - conda config --add channels https://conda.binstar.org/jjhelmus
 script:
     - conda build --quiet conda-recipe
 
