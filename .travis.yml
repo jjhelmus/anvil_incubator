@@ -4,18 +4,18 @@ language:
 env:
     matrix:
         - python=2.7
-        #- python=3.3 CONDA_PY=33 CONDA_NPY=19
-        #- python=3.4 CONDA_PY=34 CONDA_NPY=19
+        #- python=3.3 CONDA_PY=33
+        #- python=3.4 CONDA_PY=34
 
     global:
         #- secure: "cvNteNjK7jluxGWvhp7EinJDa69TuvEAwHP/CrFpGd4u6/KV+ef7gjKvDds5JqnCI5srow8iUf1lwYuJ4c4Lg8SyMizhKzyG9x6AYbfN5W3jKk7bNRTDYkzf8n+JXzOn5i35CbPe/Jp9775ITI5aYmccuM7mfSCDC6kXzhsIWTk="
 
 install: 
     - MINICONDA_URL="http://repo.continuum.io/miniconda"
-    - MINICONDA_FILE="Miniconda-3.8.3-MacOSX-x86_64.sh"
+    - MINCONDA_FILE="Miniconda3-latest-MacOSX-x86_64.sh"
     - wget "${MINICONDA_URL}/${MINICONDA_FILE}"
     - bash $MINICONDA_FILE -b
-    - export PATH=/Users/travis/miniconda/bin:$PATH
+    - export PATH=/Users/travis/miniconda3/bin:$PATH
     - conda update --yes conda
     - conda install --yes conda-build jinja2 anaconda-client
 script:
