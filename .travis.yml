@@ -20,6 +20,8 @@ install:
     - conda install --yes conda-build jinja2 anaconda-client
 script:
     - conda build -q -c jjhelmus --python 2.7 conda-recipe
+    - conda build -q -c jjhelmus --python 3.3 conda-recipe
+    - conda build -q -c jjhelmus --python 3.4 conda-recipe
     - conda build -q -c jjhelmus --python 3.5 conda-recipe
 
 after_success:
