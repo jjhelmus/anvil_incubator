@@ -14,9 +14,9 @@ environment:
     #- TARGET_ARCH: "x86"
     #  PYTHON_ARCH: "32"
 
-artifacts:
-    # Uncomment the following line to make any conda packages created
-    # available as build artifacts in AppVeyor
+# Uncomment the following two line to make any conda packages created
+# available as build artifacts in AppVeyor
+#artifacts:
     #- path: 'conda_packages\*.bz2'
 
 # We always use a 64-bit machine, but can build x86 distributions
