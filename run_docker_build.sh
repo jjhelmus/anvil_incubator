@@ -4,7 +4,7 @@ REPO_ROOT=$(cd "$(dirname "$0")/.."; pwd;)
 IMAGE_NAME="pelson/obvious-ci:latest_x64"
 
 cat << EOF | docker run -i \
-                        -v `pwd`:/recipe \
+                        -v `pwd`:/io \
                         -a stdin -a stdout -a stderr \
                         $IMAGE_NAME \
                         bash || exit $?
@@ -27,7 +27,7 @@ which python
 which conda
 
 # build packages
-conda build -q -c jjhelmus --python 2.7 --numpy 1.10 /recipe
+conda build -q -c jjhelmus --python 2.7 --numpy 1.10 /io/recipe
 
 # upload packages
 cp /opt/conda/conda-bld/*/*.tar.bz2 .
