@@ -22,12 +22,12 @@ conda install --yes conda-build jinja2 anaconda-client
 conda info
 ls
 pwd
-ls -la recipe
+ls -la /recipe
 which python
 which conda
 
 # build packages
-conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe
+conda build -q -c jjhelmus --python 2.7 --numpy 1.10 /recipe
 
 # upload packages
 cp /opt/conda/conda-bld/*/*.tar.bz2 .
