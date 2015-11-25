@@ -27,4 +27,4 @@ script:
 after_success:
     - cp /Users/travis/miniconda3/conda-bld/osx-64/*.tar.bz2 .
     - ls *.tar.bz2
-    #- anaconda -t $TOKEN upload *.tar.bz2
+    - anaconda -t $TOKEN upload *.tar.bz2
