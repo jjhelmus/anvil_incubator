@@ -33,7 +33,7 @@ install:
           $env:path="$root;$root\Scripts;$root\Library\bin;$($env:path)"
     - cmd: set PYTHONUNBUFFERED=1
     - cmd: conda update -yq conda
-    - cmd: conda intall -yq conda-build jinja2 anaconda-client
+    - cmd: conda install -yq conda-build jinja2 anaconda-client
     - cmd: conda info
 
 # Skip .NET project specific build phase.
