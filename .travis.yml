@@ -20,7 +20,7 @@ install:
     - conda install --yes conda-build jinja2 anaconda-client
 script:
     - conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe
-    - conda build -q -c jjhelmus --python 3.3 --numpy 1.10 recipe
+    - conda build -q -c jjhelmus --python 3.3 --numpy 1.9 recipe
     - conda build -q -c jjhelmus --python 3.4 --numpy 1.10 recipe
     - conda build -q -c jjhelmus --python 3.5 --numpy 1.10 recipe
 
