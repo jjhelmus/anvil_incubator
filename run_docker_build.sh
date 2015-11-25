@@ -3,19 +3,8 @@
 REPO_ROOT=$(cd "$(dirname "$0")/.."; pwd;)
 IMAGE_NAME="pelson/obvious-ci:latest_x64"
 
-config=$(cat <<CONDARC
-
-channels:
- - conda-forge
- - defaults
-
-show_channel_urls: True
-
-CONDARC
-)
-
 cat << EOF | docker run -i \
-                        -v ${REPO_ROOT}/recipes:/conda-recipes \
+                        -v ${REPO_ROOT}/recipe:/recipe \
                         -a stdin -a stdout -a stderr \
                         $IMAGE_NAME \
                         bash || exit $?
