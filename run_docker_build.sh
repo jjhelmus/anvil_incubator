@@ -22,7 +22,7 @@ conda install --yes conda-build jinja2 anaconda-client
 conda info
 ls
 pwd
-ls recipe
+ls -la recipe
 which python
 which conda
 
@@ -30,7 +30,7 @@ which conda
 conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe
 
 # upload packages
-cp ~/miniconda3/conda-bld/*/*.tar.bz2 .
+cp /opt/conda/conda-bld/*/*.tar.bz2 .
 ls *.tar.bz2
 #anaconda -t $TOKEN upload *.tar.bz2
 EOF
