@@ -19,12 +19,12 @@ install:
     - conda update --yes conda
     - conda install --yes conda-build jinja2 anaconda-client
 script:
-    - conda build -q -c jjhelmus --python 2.7 conda-recipe
-    - conda build -q -c jjhelmus --python 3.3 conda-recipe
-    - conda build -q -c jjhelmus --python 3.4 conda-recipe
-    - conda build -q -c jjhelmus --python 3.5 conda-recipe
+    - conda build -q -c jjhelmus --python 2.7 recipe
+    - conda build -q -c jjhelmus --python 3.3 recipe
+    - conda build -q -c jjhelmus --python 3.4 recipe
+    - conda build -q -c jjhelmus --python 3.5 recipe
 
 after_success:
     - cp /Users/travis/miniconda3/conda-bld/osx-64/*.tar.bz2 .
     - ls *.tar.bz2
-    - anaconda -t $TOKEN upload *.tar.bz2
+    #- anaconda -t $TOKEN upload *.tar.bz2
