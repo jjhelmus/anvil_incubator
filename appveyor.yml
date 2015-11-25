@@ -9,11 +9,8 @@ environment:
   PYTHONIOENCODING: "UTF-8"
 
   matrix:
-    - TARGET_ARCH: "x64"
-      PYTHON_ARCH: "64"
-
-    #- TARGET_ARCH: "x86"
-    #  PYTHON_ARCH: "32"
+    - PYTHON_ARCH: "64"
+    - PYTHON_ARCH: "32"
 
 # Uncomment the following two line to make any conda packages created
 # available as build artifacts in AppVeyor
@@ -21,13 +18,13 @@ environment:
     #- path: 'conda_packages\*.bz2'
 
 # We always use a 64-bit machine, but can build x86 distributions
-# with the TARGET_ARCH variable (which is used by CMD_IN_ENV).
+# with the PYTHON_ARCH variable (which is used by CMD_IN_ENV).
 platform:
     - x64
 
 install:
     # Use the pre-installed Miniconda for the desired arch
-    - ps: if($env:TARGET_ARCH -eq 'x86') 
+    - ps: if($env:PYTHON_ARCH -eq '32') 
             {$root = "C:\Miniconda"}
           else 
             {$root = "C:\Miniconda-x64"}
@@ -41,6 +38,7 @@ install:
 build: off
 
 test_script:
+    # PYTHON_VERSION must be doubly dotted version, the last "number" can be x
     - cmd: SET PYTHON_VERSION=2.7.10
     - '%CMD_IN_ENV% conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe' 
 
