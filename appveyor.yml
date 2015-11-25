@@ -13,7 +13,7 @@ environment:
   # anaconda auth --create --name jjhelmusHearthAppVeyor
   # and then encrypt at https://ci.appveyor.com/tools/encrypt
   TOKEN:
-      secure: zZBCKk3ZprYVV17kmDv/8N/OXNIxS3NIK66A+aqP3S4L2u+WgsozPF5ujx6JIeUe
+    secure: zZBCKk3ZprYVV17kmDv/8N/OXNIxS3NIK66A+aqP3S4L2u+WgsozPF5ujx6JIeUe
 
   matrix:
     - PYTHON_ARCH: "64"
@@ -65,4 +65,4 @@ test_script:
     - cmd: dir conda_packages
 
     # upload conda packages to Anaconda.org
-    - cmd: anaconda -t $TOKEN upload conda_packages\*.tar.bz2
+    - cmd: anaconda -t %TOKEN% upload conda_packages\*.tar.bz2
