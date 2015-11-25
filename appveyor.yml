@@ -11,6 +11,8 @@ environment:
   matrix:
     - TARGET_ARCH: "x64"
       PYTHON_ARCH: "64"
+      PYTHON_VERSION: "2.7.10"
+
     #- TARGET_ARCH: "x86"
     #  PYTHON_ARCH: "32"
 
