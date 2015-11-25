@@ -8,6 +8,13 @@ environment:
   # Workaround for https://github.com/conda/conda-build/issues/636
   PYTHONIOENCODING: "UTF-8"
 
+  # Token for uploading packages to Anaconda.org
+  # Create using
+  # anaconda auth --create --name jjhelmusHearthAppVeyor
+  # and then encrypt at https://ci.appveyor.com/tools/encrypt
+  TOKEN:
+      secure: zZBCKk3ZprYVV17kmDv/8N/OXNIxS3NIK66A+aqP3S4L2u+WgsozPF5ujx6JIeUe
+
   matrix:
     - PYTHON_ARCH: "64"
     - PYTHON_ARCH: "32"
@@ -56,3 +63,6 @@ test_script:
     - cmd: 'copy /Y C:\Miniconda\conda-bld\win-32\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
     - cmd: 'copy /Y C:\Miniconda-x64\conda-bld\win-64\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
     - cmd: dir conda_packages
+
+    # upload conda packages to Anaconda.org
+    - cmd: anaconda -t $TOKEN upload conda_packages\*.tar.bz2
