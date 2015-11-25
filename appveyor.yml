@@ -32,8 +32,8 @@ install:
             {$root = "C:\Miniconda-x64"}
           $env:path="$root;$root\Scripts;$root\Library\bin;$($env:path)"
     - cmd: set PYTHONUNBUFFERED=1
-    - cmd: conda update -yq conda
-    - cmd: conda install -yq conda-build jinja2 anaconda-client
+    #- cmd: conda update -yq conda
+    #- cmd: conda install -yq conda-build jinja2 anaconda-client
     - cmd: conda info
 
 # Skip .NET project specific build phase.
@@ -42,6 +42,7 @@ build: off
 test_script:
     - cmd: SET PYTHON_VERSION="2.7"
       #- '%CMD_IN_ENV% conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe' 
+    - '%CMD_IN_ENV% python --version'
     # copy any newly created conda packages into the conda_packages dir
     - cmd: mkdir conda_packages
     - cmd: 'copy /Y C:\Miniconda\conda-bld\win-32\*.bz2 conda_packages || cmd /c "exit /b 0"'
