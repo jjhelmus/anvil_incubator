@@ -4,7 +4,7 @@ REPO_ROOT=$(cd "$(dirname "$0")/.."; pwd;)
 IMAGE_NAME="pelson/obvious-ci:latest_x64"
 
 cat << EOF | docker run -i \
-                        -v ${REPO_ROOT}/recipe:/recipe \
+                        -v `pwd`:/recipe \
                         -a stdin -a stdout -a stderr \
                         $IMAGE_NAME \
                         bash || exit $?
