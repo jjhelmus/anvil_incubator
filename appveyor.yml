@@ -43,7 +43,6 @@ build: off
 
 test_script:
     - "%CMD_IN_ENV% dir"
-    - cmd: SET PYTHON_VERSION="2.7"
       #- '%CMD_IN_ENV% conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe' 
     - cmd: python --version
     - "%CMD_IN_ENV% python --version"
