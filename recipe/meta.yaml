@@ -7,6 +7,9 @@ source:
   url: https://pypi.python.org/packages/source/t/tifffile/tifffile-0.3.1.tar.gz
   md5: bd8718457f3578a6016d6dd3c6a041ed
 
+build:
+    number: 1
+
 requirements:
   build:
     - python

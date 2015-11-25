@@ -65,4 +65,4 @@ test_script:
     - cmd: dir conda_packages
 
     # upload conda packages to Anaconda.org
-    - cmd: anaconda -t %TOKEN% upload conda_packages\*.tar.bz2
+    - cmd: anaconda -t %TOKEN% upload --no-progress conda_packages\*.tar.bz2
