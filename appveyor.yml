@@ -43,8 +43,11 @@ build: off
 test_script:
     - cmd: SET PYTHON_VERSION=2.7.10
     - '%CMD_IN_ENV% conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe' 
+    - cmd: SET PYTHON_VERSION=3.3.x
+    - '%CMD_IN_ENV% conda build -q -c jjhelmus --python 3.3 --numpy 1.9 recipe' 
+
     # copy any newly created conda packages into the conda_packages dir
     - cmd: mkdir conda_packages
-    - cmd: 'copy /Y C:\Miniconda\conda-bld\win-32\*.bz2 conda_packages || cmd /c "exit /b 0"'
-    - cmd: 'copy /Y C:\Miniconda-x64\conda-bld\win-64\*.bz2 conda_packages || cmd /c "exit /b 0"'
+    - cmd: 'copy /Y C:\Miniconda\conda-bld\win-32\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
+    - cmd: 'copy /Y C:\Miniconda-x64\conda-bld\win-64\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
     - cmd: dir conda_packages
