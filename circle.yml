@@ -11,4 +11,10 @@ dependencies:
 
 test:
   override:
-    - ./run_docker_build.sh
+IMAGE_NAME="pelson/obvious-ci:latest_x64"
+
+    - docker run -i \
+      -v `pwd`:/io \
+      -a stdin -a stdout -a stderr \
+      pelson/obvious-ci:latest_x64  \
+      bash /io/run_docker_build.sh;
