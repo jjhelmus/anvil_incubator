@@ -11,4 +11,5 @@ dependencies:
 
 test:
   override:
-    - docker run -i -v `pwd`:/io pelson/obvious-ci:latest_x64 bash /io/run_docker_build.sh;
+    - docker run -i -v `pwd`:/io pelson/obvious-ci:latest_x64 
+        bash /io/run_docker_build.sh;
