@@ -7,8 +7,12 @@ source /hbb_exe/activate
 
 # install Miniconda
 set -x
-curl -s -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-bash Miniconda3-latest-Linux-x86_64.sh -b -p /anaconda
+MINICONDA_URL="https://repo.continuum.io/miniconda"
+MINICONDA_FILE="Miniconda3-latest-Linux-x86_64.sh"
+wget "${MINICONDA_URL}/${MINICONDA_FILE}"
+bash $MINICONDA_FILE -b -p /anaconda
+#curl -s -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+#bash Miniconda3-latest-Linux-x86_64.sh -b -p /anaconda
 PATH=/opt/rh/devtoolset-2/root/usr/bin:/opt/rh/autotools-latest/root/usr/bin:/anaconda/bin:$PATH
 
 # update conda, install build tools
