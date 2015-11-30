@@ -13,4 +13,4 @@ dependencies:
 test:
   override:
     - docker run -i -v `pwd`:/io phusion/holy-build-box-64:latest
-        bash /io/run_docker_build.sh;
+      bash /io/docker_build-64.sh;
