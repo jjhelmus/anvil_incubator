@@ -20,7 +20,6 @@ conda install -yq conda-build jinja2 anaconda-client
 conda info
 ls
 pwd
-ls -la /recipe
 which python
 which conda
 
