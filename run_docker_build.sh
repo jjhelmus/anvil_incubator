@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 
-unset LANG
-conda clean --lock
+set -e
 
-# update conda
-conda update --yes conda
+# Activate Holy Build Box environment.
+source /hbb_exe/activate
 
-# install build tools
-conda install --yes conda-build jinja2 anaconda-client
+# install Miniconda
+set -x
+curl -s -O https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -p /anaconda
+PATH=/opt/rh/devtoolset-2/root/usr/bin:/opt/rh/autotools-latest/root/usr/bin:/anaconda/bin:$PATH
+
+# update conda, install build tools
+conda update -yq conda
+conda install -yq conda-build jinja2 anaconda-client
+
 
 # debugging
 conda info
@@ -24,6 +31,6 @@ conda build -q -c jjhelmus --python 2.7 --numpy 1.10 /io/recipe
 #conda build -q -c jjhelmus --python 3.5 --numpy 1.10 /io/recipe
 
 # upload packages
-cp /opt/conda/conda-bld/*/*.tar.bz2 .
+cp /anaconda/conda-bld/*/*.tar.bz2 .
 ls *.tar.bz2
 #anaconda -t $TOKEN upload *.tar.bz2
