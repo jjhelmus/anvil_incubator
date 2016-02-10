@@ -31,4 +31,4 @@ conda build -q -c jjhelmus --python 3.5 --numpy 1.10 /io/recipe
 # upload packages
 cp /anaconda/conda-bld/*/*.tar.bz2 .
 ls *.tar.bz2
-anaconda -t $TOKEN upload *.tar.bz2
+#anaconda -t $TOKEN upload *.tar.bz2
