@@ -1,29 +1,32 @@
+
 package:
-  name: tifffile
-  version: 0.3.1
+    name: toolz
+    version: 0.6.0
 
 source:
-  fn: tifffile-0.3.1.tar.gz
-  url: https://pypi.python.org/packages/source/t/tifffile/tifffile-0.3.1.tar.gz
-  md5: bd8718457f3578a6016d6dd3c6a041ed
+  fn: toolz-0.6.0.tar.gz
+  url: https://pypi.python.org/packages/source/t/toolz/toolz-0.6.0.tar.gz
+  md5: 779bd5844a223c9f0be7e7ea03cc02b1
 
 build:
-    number: 1
+    number: 0
 
 requirements:
-  build:
-    - python
-    - numpy x.x
+    build:
+        - python
+        - setuptools
 
-  run:
-    - python
-    - numpy x.x
+    run:
+        - python
 
 test:
-  imports:
-    - tifffile
+    imports:
+        - toolz
+
+    #commands:
+    #    -
 
 about:
-  home: https://github.com/blink1073/tifffile
-  license:  BSD License
-  summary: 'Read and write image data from and to TIFF files.'
+    home: http://toolz.readthedocs.org/
+    license: New BSD
+
