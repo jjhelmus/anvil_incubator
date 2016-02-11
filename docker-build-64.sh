@@ -24,7 +24,10 @@ which conda
 
 # build packages
 cd /io
-./build_script_linux-32.sh
+if [ ! -f build_script_linux.sh ]; then
+    echo "Creating build script from YAML file"
+    ./create_build_script.py linux-64 > build_script_linux-64.sh
+./build_script_linux-64.sh
 
 # upload packages
 cp /anaconda/conda-bld/*/*.tar.bz2 .
