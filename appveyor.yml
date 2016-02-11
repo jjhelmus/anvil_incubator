@@ -46,7 +46,6 @@ build: off
 
 test_script:
     - cmd: IF EXIST "build_script_win-%PYTHON_ARCH%.bat" (
-               echo "Creating build script from YAML file"
                python create_build_script.py build_specs.yml "win-%PYTHON_ARCH%" > "build_script_win-%PYTHON_ARCH%.bat"
            )
     - cmd: ".\\build_script_win-%PYTHON_ARCH%.bat"
