@@ -45,18 +45,10 @@ install:
 build: off
 
 test_script:
-    # PYTHON_VERSION must be doubly dotted version, the last "number" can be x
-    - cmd: SET PYTHON_VERSION=2.7.10
-    - '%CMD_IN_ENV% conda build -q -c jjhelmus --python 2.7 --numpy 1.10 recipe' 
-
-    - cmd: SET PYTHON_VERSION=3.3.x
-    - '%CMD_IN_ENV% conda build -q -c jjhelmus --python 3.3 --numpy 1.9 recipe' 
-
-    - cmd: SET PYTHON_VERSION=3.4.x
-    - '%CMD_IN_ENV% conda build -q -c jjhelmus --python 3.4 --numpy 1.10 recipe' 
-
-    - cmd: SET PYTHON_VERSION=3.5.x
-    - '%CMD_IN_ENV% conda build -q -c jjhelmus --python 3.5 --numpy 1.10 recipe' 
+    - cmd: IF EXIST build_script_win-%PYTHON_ARCH%.bat (
+               python create_build_script.py build_specs.yml win-%PYTHON_ARCH% > build_script_win-%PYTHON_ARCH%.bat
+           )
+    - cmd: .\\build_script_win-%PYTHON_ARCH%.bat
 
     # copy any newly created conda packages into the conda_packages dir
     - cmd: mkdir conda_packages
