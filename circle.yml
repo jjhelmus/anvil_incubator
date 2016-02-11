@@ -14,6 +14,6 @@ dependencies:
 test:
   override:
     - docker run -e TOKEN -i -v `pwd`:/io phusion/holy-build-box-64:latest
-      bash /io/docker-build-64.sh;
+      bash /io/.ci_support/docker-build-64.sh;
     - docker run -e TOKEN -i -v `pwd`:/io phusion/holy-build-box-32:latest
-      linux32 bash /io/docker-build-32.sh;
+      linux32 bash /io/.ci_support/docker-build-32.sh;
