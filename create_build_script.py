@@ -18,11 +18,11 @@ def create_single_command(options):
 
 def print_commands_for_target(data, target_platform):
 
-    for key, value in data.iteritems():
+    for key, value in data.items():
         if not isinstance(value, list):
             data[key] = [value]
 
-    for i in (dict(zip(data, x)) for x in product(*data.itervalues())):
+    for i in (dict(zip(data, x)) for x in product(*data.values())):
         if i['platform'] == target_platform:
             command = create_single_command(i)
             print(command)
@@ -34,5 +34,5 @@ if __name__ == "__main__":
     yaml_file = sys.argv[1]
     target_platform = sys.argv[2]
 
-    for data in  yaml.load_all(file(yaml_file, 'r')):
+    for data in  yaml.load_all(open(yaml_file, 'r')):
         print_commands_for_target(data, target_platform)
