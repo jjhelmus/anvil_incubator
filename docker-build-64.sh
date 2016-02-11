@@ -24,9 +24,10 @@ which conda
 
 # build packages
 cd /io
-if [ ! -f build_script_linux.sh ]; then
+if [ ! -f build_script_linux-64.sh ]; then
     echo "Creating build script from YAML file"
     ./create_build_script.py linux-64 > build_script_linux-64.sh
+fi
 ./build_script_linux-64.sh
 
 # upload packages
