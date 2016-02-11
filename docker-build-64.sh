@@ -23,10 +23,8 @@ which python
 which conda
 
 # build packages
-conda build -q -c jjhelmus --python 2.7 --numpy 1.10 /io/recipe
-conda build -q -c jjhelmus --python 3.3 --numpy 1.9 /io/recipe
-conda build -q -c jjhelmus --python 3.4 --numpy 1.10 /io/recipe
-conda build -q -c jjhelmus --python 3.5 --numpy 1.10 /io/recipe
+cd /io
+./build_script_linux-32.sh
 
 # upload packages
 cp /anaconda/conda-bld/*/*.tar.bz2 .
