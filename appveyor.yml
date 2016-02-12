@@ -58,15 +58,10 @@ test_script:
 
     # upload conda packages to Anaconda.org
     - cmd: cd conda_packages
-    - cmd: echo %APPVEYOR_PULL_REQUEST_NUMBER%
-    - cmd: echo %APPVEYOR_REPO_BRANCH%
     - cmd: if [%APPVEYOR_PULL_REQUEST_NUMBER%]==[] (
-             if %APPVEYOR_REPO_BRANCH%==declare_build (
-               echo Should upload
+             if %APPVEYOR_REPO_BRANCH%==master (
+               if exist *tar.bz2 (
+                 anaconda -t %TOKEN% upload --no-progress *.tar.bz2
+               )
              )
            )
-    - cmd: IF EXIST *tar.bz2 (
-              anaconda -t %TOKEN% upload --no-progress *.tar.bz2
-            ) else (
-              echo "No files uploaded"
-            )
