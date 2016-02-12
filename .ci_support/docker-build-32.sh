@@ -32,6 +32,6 @@ ls linux-32/*.tar.bz2 2>/dev/null || true
 # upload packages
 echo $CIRCLE_PR_NUMBER
 echo $CIRCLE_BRANCH
-if [[ -z "$CIRCLE_PR_NUMBER" && "$CIRCLE_BRANCH" == "declare_build" ]]; then
+if [[ -z "$CIRCLE_PR_NUMBER" && "$CIRCLE_BRANCH" == "master" ]]; then
     ls linux-32/*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload linux-32/*.tar.bz2 || true;
 fi
