@@ -30,6 +30,7 @@ cd /io/conda-bld
 ls linux-32/*.tar.bz2 2>/dev/null || true
 
 # upload packages
-if [[ -z "$CIRCLE_PR_NUMBER" && "$CIRCLE_BRANCH" == "declare_build" ]]; then
+echo $UPLOAD
+if [ "$UPLOAD" == true ]; then
     ls linux-32/*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload linux-32/*.tar.bz2 || true;
 fi
