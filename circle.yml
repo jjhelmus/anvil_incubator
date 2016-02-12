@@ -13,10 +13,12 @@ dependencies:
 
 test:
   override:
+    - echo $CIRCLE_PR_NUMBER
+    - echo $CIRCLE_BRANCH
     - if [[ -z "$CIRCLE_PR_NUMBER" && "$CIRCLE_BRANCH" == "declare_build" ]]; then 
           export UPLOAD=true;
       else
-          export UPLOAd=false;
+          export UPLOAD=false;
       fi
     - echo $UPLOAD
 
