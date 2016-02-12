@@ -61,7 +61,7 @@ test_script:
     - cmd: echo %APPVEYOR_PULL_REQUEST_NUMBER%
     - cmd: echo %APPVEYOR_REPO_BRANCH%
     - cmd: if [%APPVEYOR_PULL_REQUEST_NUMBER%]==[] (
-             if %APPVEYOR_REPO_BRANCH%==master (
+             if %APPVEYOR_REPO_BRANCH%==declare_build (
                echo Should upload
              )
            )
