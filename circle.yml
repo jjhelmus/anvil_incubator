@@ -15,7 +15,7 @@ test:
   override:
     - echo $CIRCLE_PR_NUMBER
     - echo $CIRCLE_BRANCH
-    - if [[ -z "$CIRCLE_PR_NUMBER" && "$CIRCLE_BRANCH" == "declare_build" ]]; then export UPLOAD=true; else export UPLOAD=false; echo $UPLOAD
+    - if [[ -z "$CIRCLE_PR_NUMBER" && "$CIRCLE_BRANCH" == "declare_build" ]]; then export UPLOAD=true; else export UPLOAD=false; fi; echo $UPLOAD
     - echo $UPLOAD
 
     - docker run -e TOKEN -e UPLOAD -i -v `pwd`:/io phusion/holy-build-box-64:latest
