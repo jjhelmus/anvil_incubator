@@ -57,7 +57,7 @@ test_script:
     - cmd: dir conda_packages
 
     # upload conda packages to Anaconda.org
-     - cmd: IF EXIST *tar.bz2 (
+    - cmd: IF EXIST *tar.bz2 (
               anaconda -t %TOKEN% upload --no-progress conda_packages\*.tar.bz2
             ) else (
               echo "No files uploaded"
