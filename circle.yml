@@ -8,7 +8,10 @@ dependencies:
   override:
     - docker pull phusion/holy-build-box-64:latest
     - docker pull phusion/holy-build-box-32:latest
-
+checkout:
+  post:
+    - git submodule init 
+    - git submodule update
 test:
   override:
     - docker run -e TOKEN -e CIRCLE_PR_NUMBER -e CIRCLE_BRANCH 
