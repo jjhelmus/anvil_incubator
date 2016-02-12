@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 # Activate Holy Build Box environment.
@@ -15,13 +14,6 @@ PATH=/opt/rh/devtoolset-2/root/usr/bin:/opt/rh/autotools-latest/root/usr/bin:/an
 conda update -yq conda
 conda install -yq conda-build jinja2 anaconda-client
 
-# debugging
-conda info
-ls
-pwd
-which python
-which conda
-
 # build packages
 cd /io
 if [ ! -f build_script_linux-32.sh ]; then
@@ -32,6 +24,6 @@ fi
 ./build_script_linux-32.sh
 
 # upload packages
-cp /anaconda/conda-bld/*/*.tar.bz2 .
-ls *.tar.bz2
-#anaconda -t $TOKEN upload *.tar.bz2
+cd /anaconda/conda-bld
+ls */*.tar.bz2
+#anaconda -t $TOKEN upload */*.tar.bz2
