@@ -29,8 +29,6 @@ install:
         $env:path="$root;$root\Scripts;$root\Library\bin;$($env:path)"
   - cmd: conda update -yq conda
   - cmd: conda install -yq conda-build jinja2 anaconda-client
-  - cmd: mkdir %HOMEPATH%\conda_builds
-  - cmd: set CONDA_BLD_PATH=%HOMEPATH%\conda_builds
   # See https://github.com/omnia-md/conda-recipes/blob/master/appveyor.yml
   # conda-build for some inane reason, effectively puts C:\cygwin\bin at the
   # front of the PATH, ahead of everything else, regardless. See
@@ -52,9 +50,11 @@ test_script:
            )
     - cmd: ".\\build_script_win-%PYTHON_ARCH%.bat"
 
-    # List any packages created
-    - cmd: cd %HOMEPATH%\conda_builds
-    - cmd: tree
+    # copy any newly created conda packages into the conda_packages dir
+    - cmd: mkdir conda_packages
+    - cmd: 'copy /Y C:\Miniconda\conda-bld\win-32\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
+    - cmd: 'copy /Y C:\Miniconda-x64\conda-bld\win-64\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
+    - cmd: dir conda_packages
 
     # upload conda packages to Anaconda.org
     # - cmd: anaconda -t %TOKEN% upload --no-progress conda_packages\*.tar.bz2

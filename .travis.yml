@@ -26,6 +26,8 @@ script:
     - ./build_script_osx-64.sh
 
 after_success:
+    # List files created
     - cd ~/conda-bld
-    - ls
+    - ls *
+    # Upload to Anaconda.org
 #    - anaconda -t $TOKEN upload *.tar.bz2
