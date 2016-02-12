@@ -21,6 +21,7 @@ platform:
     - x64
 
 install:
+  - cmd: git submodule update --init --recursive
     # Use the pre-installed Miniconda for the desired arch
   - ps: if($env:PYTHON_ARCH -eq '32') 
           {$root = "C:\Miniconda"}
