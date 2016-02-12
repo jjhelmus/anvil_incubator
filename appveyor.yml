@@ -1,12 +1,8 @@
 environment:
-
   # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
   # /E:ON and /V:ON options are not enabled in the batch script interpreter
   # See: http://stackoverflow.com/a/13751649/163740
   CMD_IN_ENV: "%COMSPEC% /E:ON /V:ON /C .\\.ci_support\\run_with_env.cmd"
-
-  # Workaround for https://github.com/conda/conda-build/issues/636
-  PYTHONIOENCODING: "UTF-8"
 
   # Token for uploading packages to Anaconda.org
   # Create using
@@ -19,11 +15,6 @@ environment:
     - PYTHON_ARCH: "64"
     - PYTHON_ARCH: "32"
 
-# Uncomment the following two line to make any conda packages created
-# available as build artifacts in AppVeyor
-#artifacts:
-    #- path: 'conda_packages\*.bz2'
-
 # We always use a 64-bit machine, but can build x86 distributions
 # with the PYTHON_ARCH variable (which is used by CMD_IN_ENV).
 platform:
@@ -31,33 +22,37 @@ platform:
 
 install:
     # Use the pre-installed Miniconda for the desired arch
-    - ps: if($env:PYTHON_ARCH -eq '32') 
-            {$root = "C:\Miniconda"}
-          else 
-            {$root = "C:\Miniconda-x64"}
-          $env:path="$root;$root\Scripts;$root\Library\bin;$($env:path)"
-    - cmd: set PYTHONUNBUFFERED=1
-    - cmd: conda update -yq conda
-    - cmd: conda install -yq conda-build jinja2 anaconda-client
-    - cmd: conda info
-
-# Skip .NET project specific build phase.
-build: off
+  - ps: if($env:PYTHON_ARCH -eq '32') 
+          {$root = "C:\Miniconda"}
+        else 
+          {$root = "C:\Miniconda-x64"}
+        $env:path="$root;$root\Scripts;$root\Library\bin;$($env:path)"
+  - cmd: conda update -yq conda
+  - cmd: conda install -yq conda-build jinja2 anaconda-client
+  - cmd: mkdir %HOMEPATH%\conda_builds
+  - cmd: set CONDA_BLD_PATH=%HOMEPATH%\conda_builds
+  # See https://github.com/omnia-md/conda-recipes/blob/master/appveyor.yml
+  # conda-build for some inane reason, effectively puts C:\cygwin\bin at the
+  # front of the PATH, ahead of everything else, regardless. See
+  # https://github.com/conda/conda-build/blob/master/conda_build/external.py#L19
+  # On Appveyor, the version of git installed there doesn't work
+  # outside of the cygwin envronment, so despite a perfectly good version of
+  # git being installed somewhere else (git for windows, which works properly),
+  # conda-build will always choose to use the broken one. The only way I could
+  # think of to fix this is just to delete the broken one, so that it never gets
+  # found by conda-build. Or someone could fix conda-build.
+  - "del C:\\cygwin\\bin\\git.exe"
 
 test_script:
-    - cmd: IF EXIST build_script_win-%PYTHON_ARCH%.bat (
-               echo "Using script"
-           )
-           else (
+    # Run the build script, creating the file if needed
+    - cmd: IF NOT EXIST build_script_win-%PYTHON_ARCH%.bat (
                python create_build_script.py build_specs.yml win-%PYTHON_ARCH% > build_script_win-%PYTHON_ARCH%.bat
            )
     - cmd: ".\\build_script_win-%PYTHON_ARCH%.bat"
 
-    # copy any newly created conda packages into the conda_packages dir
-    - cmd: mkdir conda_packages
-    - cmd: 'copy /Y C:\Miniconda\conda-bld\win-32\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
-    - cmd: 'copy /Y C:\Miniconda-x64\conda-bld\win-64\*tar.bz2 conda_packages || cmd /c "exit /b 0"'
-    - cmd: dir conda_packages
+    # List any packages created
+    - cmd: cd %HOMEPATH%\conda_builds
+    - cmd: tree
 
     # upload conda packages to Anaconda.org
     # - cmd: anaconda -t %TOKEN% upload --no-progress conda_packages\*.tar.bz2
