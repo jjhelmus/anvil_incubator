@@ -31,5 +31,5 @@ after_success:
     - ls */*.tar.bz2
     # Upload to Anaconda.org
     - if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
-          ls */*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload */*.tar.bz2
+          ls */*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload */*.tar.bz2;
       fi
