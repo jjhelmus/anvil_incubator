@@ -27,7 +27,7 @@ script:
 
 after_success:
     # List files created
-    - cd ~/conda-bld
+    - cd ~/conda-bld/osx-64
     - ls *
     # Upload to Anaconda.org
 #    - anaconda -t $TOKEN upload *.tar.bz2
