@@ -27,7 +27,7 @@ fi
 
 # list packages created
 cd /io/conda-bld
-ls */*.tar.bz2 2>/dev/null || true
+ls linux-32/*.tar.bz2 2>/dev/null || true
 
 # upload packages
-ls */*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload */*.tar.bz2 || true
+ls linux-32/*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload linux-32/*.tar.bz2 || true

@@ -30,4 +30,6 @@ after_success:
     - cd ~/conda-bld
     - ls */*.tar.bz2
     # Upload to Anaconda.org
-    - ls */*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload */*.tar.bz2
+    - if [[ "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_BRANCH}" == "master" ]]; then
+          ls */*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload */*.tar.bz2
+      fi
