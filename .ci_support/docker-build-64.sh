@@ -30,6 +30,8 @@ cd /io/conda-bld
 ls linux-64/*.tar.bz2 2>/dev/null || true
 
 # upload packages
+echo $CIRCLE_PR_NUMBER
+echo $CIRCLE_BRANCH
 if [[ -z "$CIRCLE_PR_NUMBER" && "$CIRCLE_BRANCH" == "master" ]]; then
     ls linux-64/*.tar.bz2 >/dev/null 2>&1 && anaconda -t $TOKEN upload linux-64/*.tar.bz2 || true;
 fi
