@@ -43,6 +43,8 @@ install:
   # found by conda-build. Or someone could fix conda-build.
   - "del C:\\cygwin\\bin\\git.exe"
 
+build: false
+
 test_script:
     # Run the build script, creating the file if needed
     - cmd: IF NOT EXIST build_script_win-%PYTHON_ARCH%.bat (
