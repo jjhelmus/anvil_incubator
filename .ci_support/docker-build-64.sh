@@ -13,6 +13,8 @@ PATH=/opt/rh/devtoolset-2/root/usr/bin:/opt/rh/autotools-latest/root/usr/bin:/an
 # update conda, install build tools
 conda update -yq conda
 conda install -yq conda-build jinja2 anaconda-client
+mkdir /io/conda-bld
+export CONDA_BLD_PATH=/io/conda-bld
 
 # build packages
 cd /io
@@ -24,6 +26,6 @@ fi
 ./build_script_linux-64.sh
 
 # upload packages
-cd /anaconda/conda-bld
+cd /io/conda-bld
 ls */*.tar.bz2
 #anaconda -t $TOKEN upload */*.tar.bz2
