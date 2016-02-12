@@ -2,11 +2,6 @@ language:
     - objective-c
 
 env:
-    matrix:
-        - python=2.7
-        #- python=3.3 CONDA_PY=33
-        #- python=3.4 CONDA_PY=34
-
     global:
         - secure: "Vq+0tW6K4QmoIxvipfTcK1O7iisa8gu8PFf/k5rEAWCUEjdjp+HvjMIP9RvFvbciGCYmOwXl7jny24K+DGOgO4qpXA42TtUvj6aS2kmGYe6BuXF3vQlHR1Ci9MTPAqMGOgg/F6p+8HZgQdnqd5bVqcmt25ZuXf+aNpFltTINl4Z93BRwG8NsGIIX483F135Bv2/OpZc+gcjULUM7G/gOugogpOjBztgKp9kbuHB+5/GxtUhdMeFwbFbGCLzmDRg1akp6YPaWzEtSPrt/44hRixnTFbiypbzC3EhZ3dAElDA+Be44Q+vIhoEAmXZQ36Vr+1JHSWiQfbLcIqoinNHiwTU6PT+fidpfoz6L/ughJhDZ2vJLb8+90lMz3Ue/zZjR4cYCSQktVD2swYSGrxa1VDwAMgKtaUBhzyFQFM+L5x4RdVFOR1O/mjS/opXc5tPVHFypqpFRQ8PxclmzgKKHcBbeXwzUaQK9hxrglNna1fDpjYUhkilWClQtJYYE7oeCTqWdmwj4YO6x86h5D584m0MBrzA7X5o0dPjfgK2/FHuf2miKPUhvyKnxKWdJMVWXXfQpy2e24bzEzXJGMUKuSoSTap3qWE4Iuee2AI+++VafssnHL9O5vvwFL+27zfnBBB888oLOnmu5j6dfwGellgPVMxIj/BxmOo+VLJLeg5E="
 
@@ -18,10 +13,18 @@ install:
     - export PATH=/Users/travis/miniconda3/bin:$PATH
     - conda update --yes conda
     - conda install --yes conda-build jinja2 anaconda-client
+    - mkdir ~/conda-bld
+    - export CONDA_BLD_PATH=~/conda-bld
+
 script:
-    - ./.ci_support/travis_build.sh
+    - if [ ! -f build_script_osx-64.sh ]; then
+        echo "Creating build script from YAML file"
+        python create_build_script.py build_specs.yml osx-64 > build_script_osx-64.sh
+        chmod +x build_script_osx-64.sh
+      fi
+    - ./build_script_osx-64.sh
 
 after_success:
-    - cp /Users/travis/miniconda3/conda-bld/osx-64/*.tar.bz2 .
-    - ls *.tar.bz2
+    - cd ~/conda-bld
+    - ls
 #    - anaconda -t $TOKEN upload *.tar.bz2
